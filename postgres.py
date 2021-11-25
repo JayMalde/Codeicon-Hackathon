@@ -1,3 +1,5 @@
+# pip install psycopg2
+#https://pynative.com/python-postgresql-tutorial/
 import psycopg2
 
 conn = psycopg2.connect(
