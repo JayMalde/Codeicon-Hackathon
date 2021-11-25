@@ -13,7 +13,6 @@ def login():
     login_id = request.form['login_id']
     password = request.form['password']
     type = request.form['type']
-    print("login_id "+login_id+" and password = "+password+" and type "+type)
     
     con = pymysql.connect(
         host="localhost",
@@ -99,6 +98,23 @@ def formAddProducts():
     data = cur.fetchone()
     productId = data[0]+1
     return render_template('add_products.html',productId = productId)
+
+@app.route('/menu')
+def menu():
+    con = pymysql.connect(
+        host="localhost",
+        user="root",
+        passwd="",
+        database="canteen",
+        port=3306
+    )
+    cur = con.cursor()
+    sql = "select productName,price,time_required,category from products inner join price on products.productId = price.product_id inner join time_required on products.productId = time_required.product_id where status = 'available' order by category"
+    cur.execute(sql)
+    data = cur.fetchall()
+    cur.close()
+    con.close()
+    return render_template('menu.html',data = data,categoryPrinted = '')
 
 if __name__ == '__main__':
     app.run(debug=True)
