@@ -6,10 +6,9 @@
 </head>
 <body>
     <h1>Add Products</h1>
-    <form action = '/add-products' method = 'post'>
-        <input name = 'productIdActual' style="visibility: hidden" value = {{ productId }} ><br>
-        ProductId &nbsp;<input type ='number' name = 'productId' disabled id = 'productId' value = {{ productId }}  ><br>
-        ProductName &nbsp;<input type = 'text' placeholder="enter name" name = 'productName'><br>
+    <form action = '/add_product' method = 'post'>
+        ProductID &nbsp;<input type = 'text' name = 'productId'><br>
+        ProductName &nbsp;<input type = 'text' name = 'productName'><br>
         Category &nbsp;<select name="category"><br>
           <option value="Breakfast">Breakfast</option>
           <option value="Main Course">Main Course</option>

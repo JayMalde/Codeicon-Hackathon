@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Products</title>
+</head>
+<body>
+    <h1>Add Products</h1>
+    <form action = '/add_order_to_list' method = 'POST'>
+        {% for item in data %}
+        {{item[0]}}<input type="checkbox" value="{{item[0]}}" class="danger" name='items'><br>
+        {% endfor %}
+        <input type = 'submit' value = 'Submit'>
+    </form>
+</body>
+</html>
