@@ -12,7 +12,7 @@ pip install requirements.txt
 python app.py
 ```
 
-## URL Stricture 
+## URL Structure 
 ```
 ├── /
 │   ├── /admin
