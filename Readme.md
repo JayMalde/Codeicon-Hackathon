@@ -12,6 +12,6 @@ python app.py
 ```
 
 ## References
-Apriori Implementation 
-https://github.com/ymoch/apyori
-https://github.com/JayMalde/Market_Basket_Analysis
+### Apriori Implementation 
+> https://github.com/ymoch/apyori
+> https://github.com/JayMalde/Market_Basket_Analysis
