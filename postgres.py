@@ -29,7 +29,23 @@ cur = conn.cursor()
 # cur.execute("INSERT INTO products VALUES (3,'mendu wada','breakfast',50,'available',10)")
 # cur.execute("INSERT INTO products VALUES (4,'masala dosa','breakfast',100,'available',10)")
 # cur.execute("INSERT INTO products VALUES (5,'poha','breakfast',30,'available',10)")
-# print("Records inserted successfully")
-# conn.commit()
+
+# cur.execute("INSERT INTO products VALUES (18,'mineral water','drinks',10,'available',0)")
+# cur.execute("INSERT INTO products VALUES (19,'sprite','drinks',20,'available',0)")
+# cur.execute("INSERT INTO products VALUES (20,'coke','drinks',20,'available',0)")
+# cur.execute("INSERT INTO products VALUES (9,'pepsi','drinks',20,'available',0)")
+# cur.execute("INSERT INTO products VALUES (10,'lassi','drinks',60,'available',0)")
+
+# cur.execute("INSERT INTO products VALUES (11,'roti','main course',40,'available',30)")
+# cur.execute("INSERT INTO products VALUES (12,'sabji','main course',80,'available',40)")
+# cur.execute("INSERT INTO products VALUES (13,'chaas','drinks',20,'available',0)")
+# cur.execute("INSERT INTO products VALUES (14,'pav bhaji','breakfast',60,'available',20)")
+# cur.execute("INSERT INTO products VALUES (15,'misal pav','breakfast',80,'available',30)")
+
+# cur.execute("INSERT INTO products VALUES (16,'vanilla icecream','dessert',50,'available',0)")
+# cur.execute("INSERT INTO products VALUES (17,'choclate icecream','dessert',60,'available',0)")
+
+print("Records inserted successfully")
+conn.commit()
 
 conn.close()
