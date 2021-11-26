@@ -194,11 +194,6 @@ def add_order():
         con.close()
     return render_template('success.html')          
 
-@app.route('/update-order-status/<order_id>')
-def updateOrder(order_id):
-    print(order_id)
-    return render_template('update_order_status.html',order_id = order_id)
-
 @app.route('/update_order_status', methods=['GET', 'POST'])
 def order_status():
     order_id = int(request.form['order_id'])
@@ -212,9 +207,7 @@ def order_status():
     )
     cur = con.cursor()
     try:
-        sql = "update orders set status="+status+" where order_id="+order_id
-        # val = (products,status)
-        # cur.execute(sql, val)
+        sql = "update orders set status='"+status+"' where order_id="+str(order_id)
         cur.execute(sql)
     except psycopg2.InternalError as error:
         code, message = error.args

@@ -18,7 +18,18 @@
                 <td>{{item[0]}}</td>
                 <td>{{item[1]}}</td>
                 <td>{{item[2]}}</td>
-                <td><a href="/update_order_status/{{item[0]}}">Change Status</a></td>
+                <td>
+                    <form action="/update_order_status" method="post">
+                        <input type="hidden" name="order_id" value="{{item[0]}}">
+                        Status &nbsp;<select name="status"><br>
+                        <option value="ordered">Ordered</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                        </select><br>
+                        <input type = 'submit' value = 'Submit'>                
+                    </form>
+                    <!-- <a href="/update_order_status/{{item[0]}}">Change Status</a> -->
+                </td>
             </tr>
         {% endfor %}
      </table>
