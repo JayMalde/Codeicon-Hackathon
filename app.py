@@ -4,6 +4,7 @@ from flask import (Flask, render_template, redirect, request)
 import pymysql
 from csv import writer
 import psycopg2
+
 dataset = pd.read_csv('data.csv',  header = None )
 transactions = []
 list_of_products=[]
