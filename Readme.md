@@ -28,6 +28,7 @@ deploy the github branch on heroku
 |       ├── /menu (shows all the products in database)
 |       ├── /add (create a new product)
 |       ├── /orders (Shows all the orders)
+|       ├── /update_order_status (updates the status of order)
 |       ├── /recommend (shows recommendation based on history)
 |       └── /reset-basket (reset basket)
 |       
