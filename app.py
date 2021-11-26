@@ -1,7 +1,6 @@
 import pandas as pd
 from apriori import apriori
 from flask import (Flask, render_template, redirect, request)
-import pymysql
 from csv import writer
 import psycopg2
 
