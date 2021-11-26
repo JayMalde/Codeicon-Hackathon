@@ -2,13 +2,27 @@
 # https://canteen-recommendation-app.herokuapp.com/
 ## Technical Aspect
 * Python ( programming language )
-* Flask (web development library)
-* apriori ( Association Rule Mining/ Recommendation System )
+* Flask ( web development library )
+* Postgres SQL ( SQL Database )
+* apriori ( Association Rule Mining / Recommendation System )
 
 ## For Running Canteen Application
 ```bash
 pip install requirements.txt
 python app.py
+```
+
+## URL Stricture 
+```
+├── /
+│   ├── /admin
+|       ├── /menu
+|       ├── /add
+|       ├── /recommend
+|       └── /reset-basket
+|       
+│   ├── /user
+|       └── /order
 ```
 
 ## References
