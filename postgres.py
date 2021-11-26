@@ -12,10 +12,24 @@ conn = psycopg2.connect(
 print("Opened database successfully")
 
 cur = conn.cursor()
-# cur.execute("create table products(product_id int primary key,product_name varchar(100),category varchar(50),price int,time_required int)")
+
+# cur.execute("drop table products")
+# print("Deleted successfully")
+
+# cur.execute("create table products(product_id int primary key,product_name varchar(100),category varchar(50),price int,status varchar(100),time_required int)")
 # print("Table created successfully")
 # conn.commit()
-cur.execute("INSERT INTO products VALUES (1,'dosa','breakfast',80,10)")
-print("Records created successfully")
-conn.commit()
+
+# cur.execute("create table orders(order_id serial primary key,products varchar(200),status varchar(100))")
+# print("Table created successfully")
+# conn.commit()
+
+# cur.execute("INSERT INTO products VALUES (1,'dosa','breakfast',80,'available',10)")
+# cur.execute("INSERT INTO products VALUES (2,'idli','breakfast',40,'available',10)")
+# cur.execute("INSERT INTO products VALUES (3,'mendu wada','breakfast',50,'available',10)")
+# cur.execute("INSERT INTO products VALUES (4,'masala dosa','breakfast',100,'available',10)")
+# cur.execute("INSERT INTO products VALUES (5,'poha','breakfast',30,'available',10)")
+# print("Records inserted successfully")
+# conn.commit()
+
 conn.close()

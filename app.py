@@ -5,7 +5,6 @@ import pymysql
 from csv import writer
 import psycopg2
 dataset = pd.read_csv('data.csv',  header = None )
-
 transactions = []
 list_of_products=[]
 basket=[]
@@ -46,6 +45,14 @@ def recommendation(basket):
 def index():
     return render_template('index.html')
 
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    return render_template('admin.html')
+
+@app.route('/user', methods=['GET', 'POST'])
+def user():
+    return render_template('user.html')
+
 @app.route('/recommend', methods=['GET', 'POST'])
 def recommend():
     if request.method == 'POST':
@@ -77,7 +84,7 @@ def menu():
         port=5432    
     )
     cur = con.cursor()
-    sql = "select product_name,price,time_required,category from products order by category"
+    sql = "select product_name,price,time_required,category from products where status='available' order by category"
     cur.execute(sql)
     data = cur.fetchall()
     cur.close()
@@ -95,6 +102,7 @@ def addProduct():
     productName = request.form['productName']
     productId = request.form['productId']
     category = request.form['category']
+    status="available"
     con = psycopg2.connect(
         host="ec2-18-214-243-100.compute-1.amazonaws.com",
         database="dfi4ih5icfnkkl",
@@ -105,10 +113,10 @@ def addProduct():
     cur = con.cursor()
     try:
         print('Executing SQL')
-        sql = "INSERT INTO products VALUES (%s,%s,%s,%s,%s)"
-        val = (productId,productName,category,price,timeReq)
+        sql = "INSERT INTO products VALUES (%s,%s,%s,%s,%s,%s)"
+        val = (productId,productName,category,price,status,timeReq)
         cur.execute(sql, val)
-    except pymysql.InternalError as error:
+    except psycopg2.InternalError as error:
         code, message = error.args
         print("Error: " +  str(code) +  str(message))
         cur.close()
@@ -129,7 +137,7 @@ def order():
         port=5432    
     )
     cur = con.cursor()
-    sql = "select product_name,price,time_required,category from products order by category"
+    sql = "select product_name,price,time_required,category from products where status='available' order by category"
     cur.execute(sql)
     data = cur.fetchall()
     cur.close()
@@ -144,7 +152,56 @@ def add_order():
             writer_object = writer(f_object)
             writer_object.writerow(form_items)
             f_object.close()
-    return render_template('index.html')
+        products=','.join(map(str, form_items))
+        status="ordered"
+        con = psycopg2.connect(
+            host="ec2-18-214-243-100.compute-1.amazonaws.com",
+            database="dfi4ih5icfnkkl",
+            user="rmzmvojdioauqd",
+            password="b763ae371dc69381b1f96438a4a4324c7a16f4a1d93808a27e8386c4a6380e45",
+            port=5432    
+        )
+        cur = con.cursor()
+        try:
+            sql = "INSERT INTO orders(products,status) VALUES (%s,%s)"
+            val = (products,status)
+            cur.execute(sql, val)
+        except psycopg2.InternalError as error:
+            code, message = error.args
+            print("Error: " +  str(code) +  str(message))
+            cur.close()
+            con.close()
+            return render_template('error.html')
+        con.commit()
+        cur.close()
+        con.close()
+    return render_template('success.html')          
+
+@app.route('/update_order_status', methods=['GET', 'POST'])
+def order_status():
+    
+    con = psycopg2.connect(
+        host="ec2-18-214-243-100.compute-1.amazonaws.com",
+        database="dfi4ih5icfnkkl",
+        user="rmzmvojdioauqd",
+        password="b763ae371dc69381b1f96438a4a4324c7a16f4a1d93808a27e8386c4a6380e45",
+        port=5432    
+    )
+    cur = con.cursor()
+    try:
+        sql = "INSERT INTO orders(products,status) VALUES (%s,%s)"
+        val = (products,status)
+        cur.execute(sql, val)
+    except psycopg2.InternalError as error:
+        code, message = error.args
+        print("Error: " +  str(code) +  str(message))
+        cur.close()
+        con.close()
+        return render_template('error.html')
+    con.commit()
+    cur.close()
+    con.close()
+    return render_template('success.html')          
 
 if __name__ == '__main__':
     app.run()
