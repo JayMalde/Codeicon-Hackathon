@@ -89,7 +89,24 @@ def menu():
     data = cur.fetchall()
     cur.close()
     con.close()
-    return render_template('menu.html',data = data,categoryPrinted = '')
+    return render_template('menu.html',data = data)
+
+@app.route('/orders')
+def orders():
+    con = psycopg2.connect(
+        host="ec2-18-214-243-100.compute-1.amazonaws.com",
+        database="dfi4ih5icfnkkl",
+        user="rmzmvojdioauqd",
+        password="b763ae371dc69381b1f96438a4a4324c7a16f4a1d93808a27e8386c4a6380e45",
+        port=5432    
+    )
+    cur = con.cursor()
+    sql = "select * from orders"
+    cur.execute(sql)
+    data = cur.fetchall()
+    cur.close()
+    con.close()
+    return render_template('orders.html',data = data)
 
 @app.route('/add')
 def add():
@@ -177,9 +194,15 @@ def add_order():
         con.close()
     return render_template('success.html')          
 
+@app.route('/update-order-status/<order_id>')
+def updateOrder(order_id):
+    print(order_id)
+    return render_template('update_order_status.html',order_id = order_id)
+
 @app.route('/update_order_status', methods=['GET', 'POST'])
 def order_status():
-    
+    order_id = int(request.form['order_id'])
+    status = request.form['status']
     con = psycopg2.connect(
         host="ec2-18-214-243-100.compute-1.amazonaws.com",
         database="dfi4ih5icfnkkl",
@@ -189,9 +212,10 @@ def order_status():
     )
     cur = con.cursor()
     try:
-        sql = "INSERT INTO orders(products,status) VALUES (%s,%s)"
-        val = (products,status)
-        cur.execute(sql, val)
+        sql = "update orders set status="+status+" where order_id="+order_id
+        # val = (products,status)
+        # cur.execute(sql, val)
+        cur.execute(sql)
     except psycopg2.InternalError as error:
         code, message = error.args
         print("Error: " +  str(code) +  str(message))
