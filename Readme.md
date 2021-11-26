@@ -3,26 +3,36 @@
 ## Technical Aspect
 * Python ( programming language )
 * Flask ( web development library )
-* Postgres SQL ( SQL Database )
-* apriori ( Association Rule Mining / Recommendation System )
-
+* Postgres SQL on Heroku ( SQL Database )
+* Apriori ( Association Rule Mining / Recommendation System )
+* Heroku ( Cloud PaaS platform for hosting )
 ## For Running Canteen Application
 ```bash
 pip install requirements.txt
 python app.py
 ```
 
+## For Hosting
+```bash
+create a requirements.txt file
+create a Procfile file
+    * web: gunicorn app:app
+push code on github
+deploy the github branch on heroku
+```
+
 ## URL Structure 
 ```
 ├── /
 │   ├── /admin
-|       ├── /menu
-|       ├── /add
-|       ├── /recommend
-|       └── /reset-basket
+|       ├── /menu (shows all the products in database)
+|       ├── /add (create a new product)
+|       ├── /recommend (shows recommendation based on history)
+|       └── /reset-basket (reset basket)
 |       
 │   ├── /user
-|       └── /order
+|       ├── /menu (shows all the products in database)
+|       └── /order (select items and order)
 ```
 
 ## References
